@@ -16,9 +16,8 @@
 # """
 from django.contrib import admin
 from django.urls import path, include
-# from miprimerdjango.views import inicio, segunda_vista, fecha_actual
 
 urlpatterns = [
-    path('inicio', include('inicio.urls')),
+    path('', include('inicio.urls')),
     path('admin/', admin.site.urls),
 ]
