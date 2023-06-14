@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from django.template import Template, Context, loader
 from inicio.models import Perro
+from django.shortcuts import render
 
 # v1
 # def inicio(request):
@@ -26,13 +27,32 @@ from inicio.models import Perro
 
 #v3
 
+# def inicio(request):
+#     # archivo = open(r'C:\Programación\mi_primer_django\templates\inicio.html')
+#     # template = Template(archivo.read())
+#     # archivo.close()
+    
+#     template = loader.get_template('inicio.html')
+    
+#     segundos = datetime.now().second
+#     diccionario = {
+#         'mensaje': 'Acá está el mensaje de inicio...',
+#         'segundos': segundos,
+#         'segundo_par': segundos%2 == 0,
+#         'segundo_redondo': segundos%10 == 0,
+#         'listado_de_numeros': list(range(25))
+#     }
+#     # contexto = Context(diccionario)
+#     # renderizar_template = template.render(contexto)
+    
+#     renderizar_template = template.render(diccionario)
+#     return HttpResponse(renderizar_template)
+ 
+ # v4
 def inicio(request):
-    # archivo = open(r'C:\Programación\mi_primer_django\templates\inicio.html')
-    # template = Template(archivo.read())
-    # archivo.close()
-    
-    template = loader.get_template('inicio.html')
-    
+    archivo = open(r'C:\Programación\mi_primer_django\templates\inicio.html')
+    template = Template(archivo.read())
+    archivo.close()
     segundos = datetime.now().second
     diccionario = {
         'mensaje': 'Acá está el mensaje de inicio...',
@@ -41,11 +61,7 @@ def inicio(request):
         'segundo_redondo': segundos%10 == 0,
         'listado_de_numeros': list(range(25))
     }
-    # contexto = Context(diccionario)
-    # renderizar_template = template.render(contexto)
-    
-    renderizar_template = template.render(diccionario)
-    return HttpResponse(renderizar_template)
+    return render(request, 'inicio.html', diccionario)
 
 def segunda_vista(request):
     return HttpResponse('<h1>Soy la segunda vista</h1>')
