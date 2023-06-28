@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Crear Perro</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Crear Perro
+{% endblock h1_header %}
+
+{% block contenido %}
+<form action="" method="POST">
+    {% comment %} {% if perro %}
+    <h2>Se creó el perro con el nombre {{perro.nombre}} y edad {{perro.edad}} </h2>
+    {% endif %} {% endcomment %}
+    {% csrf_token %}
+     {% comment %} V1 {% endcomment %}
+    {% comment %} <p>
+        Nombre
+        <input type="text" name="nombre">
+    </p>
+    <p>
+        Edad
+        <input type="number" name="edad">
+    </p> {% endcomment %}
+    {% comment %} <input type="submit" value="Crear"> {% endcomment %}
+
+    {% comment %} V2 {% endcomment %}
+    {{formulario}}
+
+    <button>Crear</button>
+</form>
+{% endblock contenido %}
+  
