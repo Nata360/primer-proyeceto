@@ -5,7 +5,6 @@
 {% endblock title_head %}
 
 {% block h1_header %}
-{% comment %} Se creó el perro con el nombre {{perro.nombre}} y edad {{perro.edad}} {% endcomment %}
 Listado de perros
 {% endblock h1_header %}
 
@@ -13,17 +12,22 @@ Listado de perros
 <button>
     <a class="navbar-brand" href={% url 'Inicio:crear_perro' %}>Crear Perro</a>
 </button>
-<form action="" method="get">
+{% comment %} <form action="" method="get">
     {{formulario}}
     <button>Buscar</button>
-</form>
+</form> {% endcomment %}
 {% if perros %}
 {% for perro in perros %}
-{% comment %} <li>Nombre: {{perro.nombre}} - Edad: {{perro.edad}}</li> {% endcomment %}
 <li>{{perro}}
-    <a href={% url 'Inicio:eliminar_perro' perro.id %}>Eliminar</a>
-    <a href={% url 'Inicio:modificar_perro' perro.id %}>Modificar</a> 
-    {% comment %} Se solicita la info "perro.id" fuera de las comillas {% endcomment %}
+    <button>
+        <a class="navbar-brand" href={% url 'Inicio:mostrar_perro' perro.id %}>Ver más</a> 
+    </button>
+    <button>
+        <a class="navbar-brand" href={% url 'Inicio:modificar_perro' perro.id %}>Modificar</a> 
+    </button>
+    <button>
+        <a class="navbar-brand" href={% url 'Inicio:eliminar_perro' perro.id %}>Eliminar</a>
+    </button>
 </li>
 {% endfor %}
 {% else %}
