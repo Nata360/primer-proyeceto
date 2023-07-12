@@ -24,7 +24,17 @@
                 <a class="navbar-brand" href={% url 'Inicio:inicio' %}>Inicio</a>
                 <a class="navbar-brand" href={% url 'Inicio:prueba' %}>prueba</a>
                 <a class="navbar-brand" href={% url 'Inicio:listar_perros' %}>Perros</a>
-                
+                {% if request.user.is_authenticated %}
+                {% if request.user.infoextra.avatar %}
+                <img src={{request.user.infoextra.avatar.url}} alt="" height='50px'>
+                {% endif %}
+                <a class="navbar-brand" href={% url 'usuario:editar_perfil' %}>{{request.user.username}}</a>
+                <a class="btn btn-secondary" href={% url 'usuario:logout' %}>Logout</a>
+                {% else %}
+                <a class="btn btn-primary" href={% url 'usuario:login' %}>Login</a>
+                <a class="btn btn-primary" href={% url 'usuario:registrarse' %}>Registrarse</a>
+
+                {% endif %}
                     </ul>
                 </div>
             </div>

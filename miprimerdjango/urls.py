@@ -16,8 +16,14 @@
 # """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('inicio.urls')),
+    path('usuario/', include('usuario.urls')),
     path('admin/', admin.site.urls),
 ]
+
+# min 1:48:46
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

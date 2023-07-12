@@ -8,6 +8,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 # v1
 # def inicio(request):
 #     return HttpResponse('Hola, soy el nuevo inicio')
@@ -53,6 +55,8 @@ from django.urls import reverse_lazy
 #     return HttpResponse(renderizar_template)
  
  # v4
+# Decoradores para funciones de vista
+@login_required
 def prueba(request):
     
     # template = loader.get_template('inicio.html')
@@ -189,13 +193,14 @@ class ListarPerros(ListView):
     template_name = 'inicio/CBV/listar_perros_CBV.html'
     context_object_name = 'perros'
     
-class ModificarPerro(UpdateView):
+ # En el caso de los mixins, el orden de herencia es importante para funcionar.
+class ModificarPerro(LoginRequiredMixin, UpdateView ):
     model = Perro
     template_name = 'inicio/CBV/modificar_perro_CBV.html' 
     fields = ['nombre', 'edad', 'descripcion']
     success_url = reverse_lazy('Inicio:listar_perros')
     
-class EliminarPerro(DeleteView):
+class EliminarPerro(LoginRequiredMixin, DeleteView):
     model = Perro
     template_name = 'inicio/CBV/eliminar_perro_CBV.html'
     success_url = reverse_lazy('Inicio:listar_perros')
